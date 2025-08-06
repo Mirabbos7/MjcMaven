@@ -47,6 +47,7 @@ public class DataSource {
         Random random = new SecureRandom();
         for (long i = 1; i <= 20; i++) {
             newsList.add(new NewsModel(
+                    i,
                     titlesLines.get(random.nextInt(titlesLines.size())),
                     contentLines.get(random.nextInt(contentLines.size())),
                     LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
