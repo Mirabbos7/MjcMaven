@@ -19,7 +19,7 @@ public class NewsRepositoryTests {
     }
 
     @Test
-    void readAllTest(){
+    void readAllTest() {
         List<NewsModel> newsModels = newsRepository.readAll();
 
         assertNotNull(newsModels);
@@ -27,7 +27,7 @@ public class NewsRepositoryTests {
     }
 
     @Test
-    void readById(){
+    void readById() {
         NewsModel news = NewsRepository.getInstance().readAll().get(0);
         NewsModel found = NewsRepository.getInstance().readBy(news.getId());
 
@@ -53,9 +53,33 @@ public class NewsRepositoryTests {
 
 
     @Test
-    void update(){
-        NewsModel newsModel = new NewsModel(1L, "title", "content", LocalDateTime.now(), LocalDateTime.now(), 1L);
+    void update() {
+        NewsModel newsModel = new NewsModel(10L, "title", "content", LocalDateTime.now(), LocalDateTime.now(), 1L);
         newsRepository.update(newsModel);
         assertTrue(newsRepository.readAll().contains(newsModel));
+    }
+
+    @Test
+    void delete() {
+        int sizeBefore = NewsRepository.getInstance().readAll().size();
+
+        NewsRepository.getInstance().delete(1L);
+
+        int sizeAfter = NewsRepository.getInstance().readAll().size();
+
+        assertEquals(sizeBefore, sizeAfter + 1);
+    }
+
+    @Test
+    void ifIdExistReturnTrue() {
+        NewsModel newsModel = NewsRepository.getInstance().readAll().get(0);
+        assertTrue(newsRepository.ifIdExist(newsModel.getId()));
+    }
+
+    @Test
+    void ifIdExistReturnFalse() {
+
+        assertFalse(newsRepository.ifIdExist(9999999L));
+
     }
 }
