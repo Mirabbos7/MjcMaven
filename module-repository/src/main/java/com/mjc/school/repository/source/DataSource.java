@@ -23,7 +23,7 @@ public class DataSource {
         return DataSource.instance;
     }
 
-    private DataSource() {
+    DataSource() {
 
     }
 
