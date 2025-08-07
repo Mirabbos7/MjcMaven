@@ -20,6 +20,10 @@ public class NewsService {
     public NewsService() {
     }
 
+    public NewsService(NewsRepository newsRepository){
+        this.newsRepository = newsRepository;
+    }
+
     public List<NewsResponseDto> readAll() {
         return NewsMapper.INSTANCE.newsListToDtoList(newsRepository.readAll());
     }
